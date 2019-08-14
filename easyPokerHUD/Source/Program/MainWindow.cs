@@ -9,6 +9,9 @@ namespace easyPokerHUD
     {
         Timer fileWatcherStatusUpdateTimer = new Timer();
 
+        // Initiate setup page
+        SetupWindow sw;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -53,7 +56,10 @@ namespace easyPokerHUD
             }
         }
 
-        // Close every thread and write cached players to database
+        /// <summary>
+        /// Close every thread and write cached players to database
+        /// </summary>
+        /// <param name="e"></param>        
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
             //buyMessage.Text = "Writing players to database";
@@ -73,10 +79,46 @@ namespace easyPokerHUD
             
         }
 
-        //Opens donation page
+        /// <summary>
+        /// Opens donation page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void donateButton_Click(object sender, EventArgs e)
         {
             Process.Start("https://easypokerhud.com/join-hof/");
+        }
+
+        /// <summary>
+        /// Open the about page.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutBox ab = new AboutBox();
+            ab.Show();
+        }
+
+        /// <summary>
+        /// Open the settings page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            sw = new SetupWindow();
+            sw.Show();
+        }
+
+        /// <summary>
+        /// End application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

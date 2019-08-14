@@ -10,7 +10,9 @@ namespace easyPokerHUD
         private static List<string> positiveMessages = new List<string>();
         private static List<string> negativeMessages = new List<string>();
 
-        //Checks which pokerRooms are installed and activates their filewatchers
+        /// <summary>
+        /// Checks which pokerRooms are installed and activates their filewatchers
+        /// </summary>
         public static void activateFileWatchers()
         {
             if (checkIfPokerRoomIsInstalled("PokerStars"))
@@ -23,7 +25,11 @@ namespace easyPokerHUD
             }
         }
 
-        //Accesses the uninstall list of windows and checks if it contains the pokerroom-name 
+        /// <summary>
+        /// Accesses the uninstall list of windows and checks if it contains the pokerroom-name 
+        /// </summary>
+        /// <param name="pokerRoom"></param>
+        /// <returns></returns>
         private static bool checkIfPokerRoomIsInstalled(string pokerRoom)
         {
             string registry_key = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall";
@@ -50,13 +56,19 @@ namespace easyPokerHUD
             return false;
         }
 
-        //Opens the QuickStartGuide in a new browser tab
+        /// <summary>
+        /// Opens the QuickStartGuide in a new browser tab
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="e"></param>
         public static void openQuickStartGuide(Object obj, EventArgs e)
         {
             Process.Start("https://easypokerhud.com/quickstart-guides/");
         }
 
-        //Adds all status messages to two lists
+        /// <summary>
+        /// Adds all status messages to two lists
+        /// </summary>
         public static void addMessagesToLists()
         { 
             positiveMessages = new List<string>();
@@ -75,7 +87,10 @@ namespace easyPokerHUD
             }
         }
 
-        //Builds a success and an error string to display in the main window
+        /// <summary>
+        /// Builds a success and an error string to display in the main window
+        /// </summary>
+        /// <returns></returns>
         public static string[] getHUDStatusStrings()
         {
             //Get all status messages from every FileWatcher class

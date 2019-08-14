@@ -28,11 +28,13 @@ namespace easyPokerHUD
         //Populates the labels with the player data
         private void populateLabels(Player player)
         {
+            labelUsername.Text = player.name + "(" + getNumberOfHandsPlayedString(player.handsPlayed) + ")";
+
             //Set VPIP, PFR, AFq and handsPlayed 
             VPIP.Text = player.calculateVPIP().ToString();
             PFR.Text = player.calculatePFR().ToString();
             AFq.Text = player.calculateAFq().ToString();
-            handsplayed.Text = getNumberOfHandsPlayedString(player.handsPlayed);
+            //handsplayed.Text = getNumberOfHandsPlayedString(player.handsPlayed);
 
             //In case pfr is higher than vpip, vpip will be shown instead of pfr
             if (player.calculatePFR() > player.calculateVPIP())

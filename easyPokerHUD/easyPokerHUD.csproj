@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\SQLite.3.13.0\build\net45\SQLite.props" Condition="Exists('..\packages\SQLite.3.13.0\build\net45\SQLite.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -62,10 +63,11 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>logo_easypokerhud.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -135,6 +137,12 @@
     <Compile Include="Source\Poker Rooms\PokerStars\PokerStarsOverlay.designer.cs">
       <DependentUpon>PokerStarsOverlay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Source\Program\AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Program\AboutBox.Designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Source\Program\ApplicationUpdater.cs" />
     <Compile Include="Source\Program\MainMethods.cs" />
     <Compile Include="Source\Program\MainWindow.cs">
@@ -145,6 +153,21 @@
     </Compile>
     <Compile Include="Source\Program\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Source\Setup\SetupDatabase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Setup\SetupGeneral.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Setup\SetupVisual.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Setup\SetupWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\Setup\SetupWindow.Designer.cs">
+      <DependentUpon>SetupWindow.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Source\Poker Rooms\EightPoker\EightPokerOverlay.resx">
       <DependentUpon>EightPokerOverlay.cs</DependentUpon>
     </EmbeddedResource>
@@ -156,6 +179,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Source\Poker Rooms\PokerStars\PokerStarsOverlay.resx">
       <DependentUpon>PokerStarsOverlay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\Program\AboutBox.resx">
+      <DependentUpon>AboutBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Source\Program\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
@@ -169,7 +195,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="easyPokerHUD_TemporaryKey.pfx" />
+    <EmbeddedResource Include="Source\Setup\SetupWindow.resx">
+      <DependentUpon>SetupWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -185,7 +213,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="logo_easypokerhud.ico" />
     <Content Include="Resources\logo_easypokerhud.ico" />
     <Content Include="Resources\Logo_weiß_easyPokerHUD.png" />
   </ItemGroup>
@@ -209,5 +236,6 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets'))" />
+    <Error Condition="!Exists('..\packages\SQLite.3.13.0\build\net45\SQLite.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SQLite.3.13.0\build\net45\SQLite.props'))" />
   </Target>
 </Project>

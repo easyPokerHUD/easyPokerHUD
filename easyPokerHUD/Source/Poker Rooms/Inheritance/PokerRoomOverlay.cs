@@ -123,7 +123,8 @@ namespace easyPokerHUD
                 statsWindow.VPIP.Font = fontForTheStats;
                 statsWindow.PFR.Font = fontForTheStats;
                 statsWindow.AFq.Font = fontForTheStats;
-                statsWindow.handsplayed.Font = new Font("Arial", fontSize + 2, FontStyle.Regular);
+                //statsWindow.handsplayed.Font = new Font("Arial", fontSize + 2, FontStyle.Regular);
+                statsWindow.labelUsername.Font = new Font("Arial", fontSize + 2, FontStyle.Regular);
             }
         }
 
