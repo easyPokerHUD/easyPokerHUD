@@ -16,7 +16,7 @@ namespace easyPokerHUD
         Panel VisiblePanel = null;
 
         // initiate sub-pages
-        static SetupGeneral general;
+        static SetupGeneral pageGeneral;
 
         public SetupWindow()
         {
@@ -42,13 +42,11 @@ namespace easyPokerHUD
             VisiblePanel = Panels[index];
         }
 
-        public void ShowGeneral()
-        {
-            general = new SetupGeneral();
-        }
-
         private void SetupWindow_Load(object sender, EventArgs e)
         {
+            // Initialize all setup pages
+            pageGeneral = new SetupGeneral();
+
             // Expand all tree nodes
             treeViewSetup.ExpandAll();
 
@@ -73,6 +71,16 @@ namespace easyPokerHUD
         {
             int index = int.Parse(e.Node.Tag.ToString());
             DisplayPanel(index);
+        }
+
+        private void ButtonFolderPathOk_Click(object sender, EventArgs e)
+        {
+            pageGeneral.SaveFolderPath(textBoxFolderPath.Text);
+        }
+
+        private void ButtonFolderPathCancel_Click(object sender, EventArgs e)
+        {
+            textBoxFolderPath.Text = pageGeneral.LoadFolderPath();
         }
     }    
 }

@@ -35,16 +35,16 @@
             this.tabControlSetup = new System.Windows.Forms.TabControl();
             this.tabPageGeneral = new System.Windows.Forms.TabPage();
             this.panelGeneral = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
+            this.buttonFolderPathOk = new System.Windows.Forms.Button();
+            this.buttonFolderPathCancel = new System.Windows.Forms.Button();
+            this.textBoxFolderPath = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.tabPageVisual = new System.Windows.Forms.TabPage();
             this.panelVisual = new System.Windows.Forms.Panel();
             this.tabPageDatabse = new System.Windows.Forms.TabPage();
             this.panelDatabase = new System.Windows.Forms.Panel();
             this.treeViewSetup = new System.Windows.Forms.TreeView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBoxFolderPath = new System.Windows.Forms.TextBox();
-            this.buttonFolderPathCancel = new System.Windows.Forms.Button();
-            this.buttonFolderPathOk = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControlSetup.SuspendLayout();
             this.tabPageGeneral.SuspendLayout();
@@ -104,6 +104,52 @@
             this.panelGeneral.Name = "panelGeneral";
             this.panelGeneral.Size = new System.Drawing.Size(580, 412);
             this.panelGeneral.TabIndex = 0;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(502, 386);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Default";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // buttonFolderPathOk
+            // 
+            this.buttonFolderPathOk.Location = new System.Drawing.Point(226, 56);
+            this.buttonFolderPathOk.Name = "buttonFolderPathOk";
+            this.buttonFolderPathOk.Size = new System.Drawing.Size(75, 23);
+            this.buttonFolderPathOk.TabIndex = 3;
+            this.buttonFolderPathOk.Text = "OK";
+            this.buttonFolderPathOk.UseVisualStyleBackColor = true;
+            this.buttonFolderPathOk.Click += new System.EventHandler(this.ButtonFolderPathOk_Click);
+            // 
+            // buttonFolderPathCancel
+            // 
+            this.buttonFolderPathCancel.Location = new System.Drawing.Point(307, 56);
+            this.buttonFolderPathCancel.Name = "buttonFolderPathCancel";
+            this.buttonFolderPathCancel.Size = new System.Drawing.Size(75, 23);
+            this.buttonFolderPathCancel.TabIndex = 2;
+            this.buttonFolderPathCancel.Text = "Cancel";
+            this.buttonFolderPathCancel.UseVisualStyleBackColor = true;
+            this.buttonFolderPathCancel.Click += new System.EventHandler(this.ButtonFolderPathCancel_Click);
+            // 
+            // textBoxFolderPath
+            // 
+            this.textBoxFolderPath.Location = new System.Drawing.Point(72, 29);
+            this.textBoxFolderPath.Name = "textBoxFolderPath";
+            this.textBoxFolderPath.Size = new System.Drawing.Size(311, 20);
+            this.textBoxFolderPath.TabIndex = 1;
+            this.textBoxFolderPath.Text = "Folder Path";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 32);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(63, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Folder path:";
             // 
             // tabPageVisual
             // 
@@ -165,50 +211,6 @@
             this.treeViewSetup.Size = new System.Drawing.Size(194, 444);
             this.treeViewSetup.TabIndex = 1;
             this.treeViewSetup.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeViewSetup_AfterSelect);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 32);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Folder path:";
-            // 
-            // textBoxFolderPath
-            // 
-            this.textBoxFolderPath.Location = new System.Drawing.Point(72, 29);
-            this.textBoxFolderPath.Name = "textBoxFolderPath";
-            this.textBoxFolderPath.Size = new System.Drawing.Size(311, 20);
-            this.textBoxFolderPath.TabIndex = 1;
-            this.textBoxFolderPath.Text = "Folder Path";
-            // 
-            // buttonFolderPathCancel
-            // 
-            this.buttonFolderPathCancel.Location = new System.Drawing.Point(307, 56);
-            this.buttonFolderPathCancel.Name = "buttonFolderPathCancel";
-            this.buttonFolderPathCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonFolderPathCancel.TabIndex = 2;
-            this.buttonFolderPathCancel.Text = "Cancel";
-            this.buttonFolderPathCancel.UseVisualStyleBackColor = true;
-            // 
-            // buttonFolderPathOk
-            // 
-            this.buttonFolderPathOk.Location = new System.Drawing.Point(226, 56);
-            this.buttonFolderPathOk.Name = "buttonFolderPathOk";
-            this.buttonFolderPathOk.Size = new System.Drawing.Size(75, 23);
-            this.buttonFolderPathOk.TabIndex = 3;
-            this.buttonFolderPathOk.Text = "OK";
-            this.buttonFolderPathOk.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(502, 386);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Default";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // SetupWindow
             // 

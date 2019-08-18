@@ -24,6 +24,7 @@ namespace easyPokerHUD
             else
             {
                 // Other historywatcher here
+                handHistoryWatcher = new HandHistoryWatcher(System.Environment.SpecialFolder.LocalApplicationData, "PokerStars", "HandHistory"); //Only for test
             }
 
             handHistoryWatcher.Changed += getInformationAndPassItToHUD;
