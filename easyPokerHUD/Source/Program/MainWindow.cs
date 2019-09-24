@@ -41,7 +41,8 @@ namespace easyPokerHUD
             }
             else
             {
-                successMessage.Text = "HUD is up and running for " + statusStrings[0] + ".";
+                successMessage.Text = "HUD is up and running for " + statusStrings[0] + ".\n";
+                Console.WriteLine("StatusStrings[0]: " + statusStrings[0]);
             }
 
             if (statusStrings[1].Equals(""))

@@ -9,7 +9,8 @@ namespace easyPokerHUD
     /// <summary>
     /// A class to hold variables and methods for the visuals setting page
     /// </summary>
-    class SetupVisual : SetupWindow
+    /// 
+    public partial class SetupWindow
     {
     }
 }

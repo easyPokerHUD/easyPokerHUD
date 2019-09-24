@@ -45,6 +45,7 @@
             this.tabPageDatabse = new System.Windows.Forms.TabPage();
             this.panelDatabase = new System.Windows.Forms.Panel();
             this.treeViewSetup = new System.Windows.Forms.TreeView();
+            this.buttonFolderPathBrowse = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tabControlSetup.SuspendLayout();
             this.tabPageGeneral.SuspendLayout();
@@ -94,6 +95,7 @@
             // 
             // panelGeneral
             // 
+            this.panelGeneral.Controls.Add(this.buttonFolderPathBrowse);
             this.panelGeneral.Controls.Add(this.button1);
             this.panelGeneral.Controls.Add(this.buttonFolderPathOk);
             this.panelGeneral.Controls.Add(this.buttonFolderPathCancel);
@@ -140,7 +142,6 @@
             this.textBoxFolderPath.Name = "textBoxFolderPath";
             this.textBoxFolderPath.Size = new System.Drawing.Size(311, 20);
             this.textBoxFolderPath.TabIndex = 1;
-            this.textBoxFolderPath.Text = "Folder Path";
             // 
             // label1
             // 
@@ -212,6 +213,16 @@
             this.treeViewSetup.TabIndex = 1;
             this.treeViewSetup.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.TreeViewSetup_AfterSelect);
             // 
+            // buttonFolderPathBrowse
+            // 
+            this.buttonFolderPathBrowse.Location = new System.Drawing.Point(389, 29);
+            this.buttonFolderPathBrowse.Name = "buttonFolderPathBrowse";
+            this.buttonFolderPathBrowse.Size = new System.Drawing.Size(90, 20);
+            this.buttonFolderPathBrowse.TabIndex = 5;
+            this.buttonFolderPathBrowse.Text = "Browse";
+            this.buttonFolderPathBrowse.UseVisualStyleBackColor = true;
+            this.buttonFolderPathBrowse.Click += new System.EventHandler(this.ButtonFolderPathBrowse_Click);
+            // 
             // SetupWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -248,5 +259,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button buttonFolderPathOk;
         private System.Windows.Forms.Button buttonFolderPathCancel;
+        private System.Windows.Forms.Button buttonFolderPathBrowse;
     }
 }

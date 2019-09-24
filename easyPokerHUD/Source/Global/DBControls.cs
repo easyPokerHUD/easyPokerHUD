@@ -81,6 +81,7 @@ namespace easyPokerHUD
                 }
             } catch (Exception e)
             {
+                Console.WriteLine("CombineDataSets Error. \n" + e.Message);
                 createDatabase();
             }
         }
@@ -101,6 +102,7 @@ namespace easyPokerHUD
             }
             catch (Exception e)
             {
+                Console.WriteLine("Execute command in database Error. \n" + e.Message);
                 createDatabase();
             }
         }

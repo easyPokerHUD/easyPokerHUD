@@ -15,9 +15,6 @@ namespace easyPokerHUD
         List<Panel> Panels = new List<Panel>();
         Panel VisiblePanel = null;
 
-        // initiate sub-pages
-        static SetupGeneral pageGeneral;
-
         public SetupWindow()
         {
             InitializeComponent();            
@@ -44,8 +41,7 @@ namespace easyPokerHUD
 
         private void SetupWindow_Load(object sender, EventArgs e)
         {
-            // Initialize all setup pages
-            pageGeneral = new SetupGeneral();
+            CheckFolderPathSetting();
 
             // Expand all tree nodes
             treeViewSetup.ExpandAll();
@@ -64,8 +60,11 @@ namespace easyPokerHUD
                 panel.Visible = false;
             }
 
+            // Start on the first panel which is the General tab
             DisplayPanel(0);
         }
+
+        #region General
 
         private void TreeViewSetup_AfterSelect(object sender, TreeViewEventArgs e)
         {
@@ -74,13 +73,29 @@ namespace easyPokerHUD
         }
 
         private void ButtonFolderPathOk_Click(object sender, EventArgs e)
-        {
-            pageGeneral.SaveFolderPath(textBoxFolderPath.Text);
+        {            
+            SaveFolderPath(textBoxFolderPath.Text);
+            MainMethods.activateFileWatchers();
+            MessageBox.Show("New folder path saved at: \n" + textBoxFolderPath.Text);
         }
 
         private void ButtonFolderPathCancel_Click(object sender, EventArgs e)
         {
-            textBoxFolderPath.Text = pageGeneral.LoadFolderPath();
+            textBoxFolderPath.Text = LoadFolderPath();
         }
-    }    
+
+        private void ButtonFolderPathBrowse_Click(object sender, EventArgs e)
+        {
+            string folderPath = "";
+            FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                folderPath = folderBrowserDialog1.SelectedPath;
+            }
+
+            textBoxFolderPath.Text = folderPath;
+        }
+
+        #endregion
+    }
 }

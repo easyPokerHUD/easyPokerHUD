@@ -21,7 +21,7 @@ namespace easyPokerHUD
             }
             if (checkIfPokerRoomIsInstalled("888poker"))
             {
-                EightPokerMain.activateFileWatcher();
+                //EightPokerMain.activateFileWatcher();
             }
         }
 

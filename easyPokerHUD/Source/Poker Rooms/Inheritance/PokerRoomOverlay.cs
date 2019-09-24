@@ -108,23 +108,27 @@ namespace easyPokerHUD
             {
                 this.Controls.Add(statsWindow);
                 statsWindow.Visible = false;
+                statsWindow.tableLayoutPanel1.AutoSize = true;
             }
         }
 
         //Adjusts the font size according to the window size
-        protected void setStatsWindowsFontSize()
+        public void setStatsWindowsFontSize()
         {
-            float fontSize = this.Width / 99 /getScalingFactor();
-            float fontSizeForWindow = this.Width / 120;
+            float fontSize = this.Width / 128 /getScalingFactor(); //99
+            //float fontSizeForWindow = this.Width / 120; //120
+            FontFamily fontFamily = new FontFamily("Helvetica");
             foreach (StatsWindow statsWindow in statsWindowList)
             {
-                statsWindow.Font = new Font("Arial", fontSizeForWindow);
-                Font fontForTheStats = new Font("Arial", fontSize + 2, FontStyle.Bold);
+                //statsWindow.Font = new Font("Arial", fontSizeForWindow);
+                Font fontForTheStats = new Font(fontFamily, fontSize, FontStyle.Bold);
+                //Font fontForTheText = new Font(fontFamily, fontSize, FontStyle.Regular, GraphicsUnit.Point, 0);
+
                 statsWindow.VPIP.Font = fontForTheStats;
                 statsWindow.PFR.Font = fontForTheStats;
                 statsWindow.AFq.Font = fontForTheStats;
-                //statsWindow.handsplayed.Font = new Font("Arial", fontSize + 2, FontStyle.Regular);
-                statsWindow.labelUsername.Font = new Font("Arial", fontSize + 2, FontStyle.Regular);
+                statsWindow.BB.Font = fontForTheStats;
+                statsWindow.Username.Font = fontForTheStats; // new Font("Arial", fontSize, FontStyle.Regular);
             }
         }
 
@@ -137,9 +141,10 @@ namespace easyPokerHUD
             int PhysicalScreenHeight = GetDeviceCaps(desktop, (int)DeviceCap.DESKTOPVERTRES);
             int logpixelsy = GetDeviceCaps(desktop, (int)DeviceCap.LOGPIXELSY);
             float screenScalingFactor = (float)PhysicalScreenHeight / (float)LogicalScreenHeight;
-            float dpiScalingFactor = (float)logpixelsy / (float)96;
+            float dpiScalingFactor = (float)logpixelsy / (float)96; //96;
 
             return dpiScalingFactor; // 1.25 = 125%
+            //return screenScalingFactor;
         }
 
         //Prepares the player seat numbers according to the size of the table
@@ -170,8 +175,9 @@ namespace easyPokerHUD
                     statsWindow.populateStatsWindow(playerForThisSeat);
                     statsWindow.Visible = true;
                 }
-                catch
+                catch(InvalidOperationException)
                 {
+                    Console.Out.WriteLine("Hiding HUD for Seat " + statsWindow.seatNumber);
                     statsWindow.Visible = false;
                 }
             }

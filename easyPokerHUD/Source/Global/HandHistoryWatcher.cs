@@ -28,7 +28,7 @@ namespace easyPokerHUD
         {
             // Set the global variables
             this.windowsEnvironmentFolder = windowsEnvironmentFolder;
-            this.historyFolder = folderPath;
+            this.historyFolder = Environment.GetFolderPath(windowsEnvironmentFolder);
             this.pokerRoom = pokerRoom;
             this.handHistoryFolder = handHistoryFolder;
             
@@ -49,13 +49,10 @@ namespace easyPokerHUD
         /// <param name="windowsEnvironmentFolder"></param>
         /// <param name="pokerRoom"></param>
         /// <param name="handHistoryFolder"></param>
-        public HandHistoryWatcher(string folderPath, string pokerRoom)
+        public HandHistoryWatcher(string folderPath)
         {
             //Set the global variables
-            //this.windowsEnvironmentFolder = windowsEnvironmentFolder;
             this.historyFolder = folderPath;
-            this.pokerRoom = pokerRoom;
-            //this.handHistoryFolder = handHistoryFolder;
 
             //Set the filters for the filewatcher
             NotifyFilter = NotifyFilters.LastWrite;
@@ -106,8 +103,34 @@ namespace easyPokerHUD
                 directorySearcher.Dispose();
             }
             EnableRaisingEvents = true;
+
             pMessage = pokerRoom;
             nMessage = "";
+
+        }
+
+        /// <summary>
+        /// Stop the filewatcher if it is throwing too many exceptions and crashes the app
+        /// </summary>
+        private void stopFileWatcher()
+        {
+            EnableRaisingEvents = false;
+
+            nMessage = pokerRoom + " is deactivated.";
+        }
+
+        /// <summary>
+        /// Check if the a folder is empty
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public bool IsDirectoryEmpty(string path)
+        {
+            IEnumerable<string> items = Directory.EnumerateFileSystemEntries(path);
+            using (IEnumerator<string> en = items.GetEnumerator())
+            {
+                return !en.MoveNext();
+            }
         }
 
         /// <summary>
@@ -116,34 +139,70 @@ namespace easyPokerHUD
         /// <returns>Returns Folder path</returns>
         private string getHandHistoryDirectory()
         {
-            try
+            Console.WriteLine("PokerRoom: " + pokerRoom);
+            if (!string.IsNullOrEmpty(pokerRoom))
             {
-                //Start in the user folder, where the poker room stores the hand history and move on from there
-                var startingDirectory = new DirectoryInfo(@Environment.GetFolderPath(windowsEnvironmentFolder)); 
-                var possibleDirectories = startingDirectory.GetDirectories().Where(s => s.ToString().Contains(pokerRoom)).OrderByDescending(f => f.LastWriteTime);
-
-                //Take the list of possible directories and return the most recent one, that contains the hand history folder
-                foreach (DirectoryInfo possibleDirectory in possibleDirectories)
+                
+                Console.WriteLine("No pokerRoom variable");
+                try
                 {
+                    //Start in the user folder, where the poker room stores the hand history and move on from there
+                    var startingDirectory = new DirectoryInfo(historyFolder);
+                    Console.WriteLine("Starting directory: " + startingDirectory);
+                    var possibleDirectories = startingDirectory.GetDirectories().Where(s => s.ToString().Contains(pokerRoom)).OrderByDescending(f => f.LastWriteTime);
+
+                    //Take the list of possible directories and return the most recent one, that contains the hand history folder
+                    foreach (DirectoryInfo possibleDirectory in possibleDirectories)
+                    {
+                        try
+                        {
+                            var probableDirectory = possibleDirectory.GetDirectories().Where(s => s.ToString().Contains(handHistoryFolder)).Single();
+                            Console.WriteLine("Probable directory: " + probableDirectory.FullName.ToString());
+                            return probableDirectory.FullName.ToString();
+                        }
+                        catch
+                        {
+                            /*Do nothing when no such directory is found */
+                            Console.WriteLine("Directory not found... Checking next.");
+                        }
+                    }
+
+                    return "";
+                }
+                catch
+                {
+                    Console.WriteLine("Can't get history directory");
+                    return "";
+                }
+            }
+            else
+            {
+                Console.WriteLine("PokerRoom preferred");
+                // If the user has set the handhistory folder there is no need to look for it.
+                // We don't know what software the user is using so we're using a general term for the poker room here, which will be showed on the main window.
+                pokerRoom = "your poker app"; 
+
+                try
+                {
+                    var startingDirectory = new DirectoryInfo(historyFolder);
+                    Console.WriteLine("Starting directory: " + startingDirectory);
+                    var possibleDirectories = startingDirectory.FullName;
+
                     try
                     {
-                        var probableDirectory = possibleDirectory.GetDirectories().Where(s => s.ToString().Contains(handHistoryFolder)).Single();
-                        Console.WriteLine("Probable directory: " + probableDirectory.FullName.ToString());
-                        return probableDirectory.FullName.ToString();
+                        return possibleDirectories.ToString();
                     }
                     catch
                     {
-                        /*Do nothing when no such directory is found */
-                        Console.WriteLine("Directory not find... Checking next.");
+                        Console.WriteLine("Can't find directory");
                     }
-                }
 
-                return "";
-            }
-            catch
-            {
-                Console.WriteLine("Can't get history directory");
-                return "";
+                    return "";
+                }
+                catch
+                {
+                    return "";
+                }
             }
         }
 

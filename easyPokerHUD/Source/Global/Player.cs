@@ -10,6 +10,8 @@ namespace easyPokerHUD
         public Boolean hadActionInPot;
         public int seat;
         public int handsPlayed;
+        public int chips;
+        public double bigBlinds;
         public int preflopCalls;
         public int preflopBetsAndRaises;
         public int postflopBetsAndRaises;
@@ -22,6 +24,8 @@ namespace easyPokerHUD
             this.hadActionInPot = false;
             this.seat = 0;
             this.handsPlayed = 0;
+            chips = 0;
+            bigBlinds = 0;
             preflopCalls = 0;
             preflopBetsAndRaises = 0;
             postflopBetsAndRaises = 0;
@@ -68,6 +72,11 @@ namespace easyPokerHUD
                 float AFq = ((float)postflopBetsAndRaises / ((float)postflopBetsAndRaises+(float)postflopCallsChecksAndFolds)) * 100;
                 return Convert.ToInt16(AFq);
             }
+        }
+
+        public double calculateBB()
+        {
+            return Math.Round(bigBlinds, 1);
         }
 
         //Combines the current dataset with the dataset in the database
