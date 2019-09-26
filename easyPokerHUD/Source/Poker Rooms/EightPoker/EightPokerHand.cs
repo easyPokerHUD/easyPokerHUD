@@ -12,28 +12,43 @@ namespace easyPokerHUD
             this.path = path;
             pokerRoom = "EightPoker";
 
-            //Read in the hand from the txt file
-            hand = getHand(path, "Summary", "");
+            try
+            {
+                //Read in the hand from the txt file
+                hand = getHand(path, "Summary", "");
 
-            //Store the general information about the hand in separate strings
-            handInformation = hand[1];
-            tableInformation = hand[3];
+                //Store the general information about the hand in separate strings
+                handInformation = hand[1];
+                tableInformation = hand[3];
 
-            //Separate the hand into pieces
-            playerOverview = hand.TakeWhile(s => !s.Contains("Dealing down cards")).ToArray();
-            playerOverview = hand.Reverse().SkipWhile(s => !s.Contains("Seat")).TakeWhile(s => s.Contains("Seat ")).Reverse().ToArray();
-            preflop = hand.SkipWhile(s => !s.Contains("Dealing down cards")).TakeWhile(s => !s.Contains("Dealing flop")).ToArray();
-            postflop = hand.SkipWhile(s => !s.Contains("Dealing flop")).TakeWhile(s => !s.Contains("Summary")).ToArray();
+                //Separate the hand into pieces
+                playerOverview = hand.TakeWhile(s => !s.Contains("Dealing down cards")).ToArray();
+                playerOverview = hand.Reverse().SkipWhile(s => !s.Contains("Seat")).TakeWhile(s => s.Contains("Seat ")).Reverse().ToArray();
+                preflop = hand.SkipWhile(s => !s.Contains("Dealing down cards")).TakeWhile(s => !s.Contains("Dealing flop")).ToArray();
+                postflop = hand.SkipWhile(s => !s.Contains("Dealing flop")).TakeWhile(s => !s.Contains("Summary")).ToArray();
 
-            //Get the table name and table size from the tableinformation string
-            tableName = getTableName(tableInformation);
-            tableSize = getTableSize(tableInformation);
+                //Get the table name and table size from the tableinformation string
+                tableName = getTableName(tableInformation);
+                tableSize = getTableSize(tableInformation);
 
-            //Get the players with stats playing in this hand
-            players = getPlayersWithStats(playerOverview, preflop, postflop, pokerRoom);
+                //Get the players with stats playing in this hand
+                players = getPlayersWithStats(playerOverview, preflop, postflop, pokerRoom);
 
-            //Get the player name of this hand
-            playerName = getPlayerName(hand);
+                //Get the player name of this hand
+                playerName = getPlayerName(hand);
+            }
+            catch(IndexOutOfRangeException e)
+            {                
+                Console.WriteLine(e.Message);
+            }
+            catch(NullReferenceException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            catch(NotImplementedException e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         //Gets the table name of the hand
