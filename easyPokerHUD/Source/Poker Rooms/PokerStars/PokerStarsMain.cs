@@ -17,7 +17,16 @@ namespace easyPokerHUD
         //Activates the Filewatcher
         public static void activateFileWatcher()
         {
-            handHistoryWatcher = new HandHistoryWatcher(System.Environment.SpecialFolder.LocalApplicationData, "PokerStars", "HandHistory");
+            if (string.IsNullOrEmpty(Properties.Settings.Default.userFolderPath))
+            {
+                handHistoryWatcher = new HandHistoryWatcher(System.Environment.SpecialFolder.LocalApplicationData, "PokerStars", "HandHistory");
+            }
+            else
+            {
+                // If user has set a filepath directly in the handhistory folder
+                handHistoryWatcher = new HandHistoryWatcher(Properties.Settings.Default.userFolderPath);
+            }
+
             handHistoryWatcher.Changed += getInformationAndPassItToHUD;
         }
 
