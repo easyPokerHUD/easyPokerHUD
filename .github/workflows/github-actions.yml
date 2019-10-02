@@ -1,0 +1,38 @@
+name: CI GitHub Actions
+
+on:
+  push:
+    branches:
+    - master
+    - dev
+  pull_request:
+    branches:
+    - master
+    - dev
+  schedule:
+    - cron:  '1 0 * * 1'
+
+jobs:
+  build-windows:
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-2016, windows-2019]
+      fail-fast: false
+
+    steps:
+    - uses: actions/checkout@v1
+    
+    - name: Setup MSBuild.exe
+      uses: warrenbuckley/Setup-MSBuild@v1
+      
+    - name: Setup Nuget.exe
+      uses: warrenbuckley/Setup-Nuget@v1
+      
+    - name: Restore Nuget packages
+      run: nuget restore
+      
+    - name: Build and publish project
+      working-directory: easyPokerHUD
+      run: msbuild easyPokerHUD.csproj /t:Clean;Restore;Build;Publish /p:Configuration=Release
